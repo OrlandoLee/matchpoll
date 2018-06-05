@@ -1,0 +1,107 @@
+<%= form_with(model: job, local: true) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :source %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :snippet %>
+    <%= form.text_area :snippet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :posted_time %>
+    <%= form.text_field :posted_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :posted_time_friendly %>
+    <%= form.text_field :posted_time_friendly %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_source %>
+    <%= form.text_field :salary_source %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_interval %>
+    <%= form.text_field :salary_interval %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_max %>
+    <%= form.number_field :salary_max %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_max_annual %>
+    <%= form.number_field :salary_max_annual %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_min %>
+    <%= form.number_field :salary_min %>
+  </div>
+
+  <div class="field">
+    <%= form.label :industry_name %>
+    <%= form.text_field :industry_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hiring_company_id %>
+    <%= form.text_field :hiring_company_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

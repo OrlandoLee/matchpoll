@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source: MyString
+  name: MyString
+  snippet: MyText
+  category: MyString
+  posted_time: MyString
+  posted_time_friendly: MyString
+  url: MyString
+  location: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  salary_source: MyString
+  salary_interval: MyString
+  salary_max: 1
+  salary_max_annual: 1
+  salary_min: 1
+  industry_name: MyString
+  hiring_company: one
+
+two:
+  source: MyString
+  name: MyString
+  snippet: MyText
+  category: MyString
+  posted_time: MyString
+  posted_time_friendly: MyString
+  url: MyString
+  location: MyString
+  city: MyString
+  state: MyString
+  country: MyString
+  salary_source: MyString
+  salary_interval: MyString
+  salary_max: 1
+  salary_max_annual: 1
+  salary_min: 1
+  industry_name: MyString
+  hiring_company: two
