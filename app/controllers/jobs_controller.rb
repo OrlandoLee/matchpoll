@@ -4,6 +4,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
+    p ENV["ZIP_API_KEY"]
     @jobs = Job.all
   end
 
