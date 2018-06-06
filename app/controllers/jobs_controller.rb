@@ -4,8 +4,32 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    p ENV["ZIP_API_KEY"]
-    @jobs = Job.all
+    url = 'https://api.ziprecruiter.com/jobs/v1'
+    zip_params = {}
+    zip_params['api_key'] = ENV["ZIP_API_KEY"]
+    zip_params['search'] = 'Perl Job'
+    zip_params['location'] = 'Santa Monica, CA'
+    zip_params['radius_miles'] = 25
+    zip_params['page'] = 1
+    zip_params['jobs_per_page'] = 10
+    zip_params['days_ago'] = ''
+    zip_params['refine_by_salary'] = ''
+    
+    begin
+       response = RestClient.get url, {params: zip_params}
+       parsed_response = JSON.parse(response)
+       @total_jobs = parsed_response['total_jobs']
+       @jobs = []
+       parsed_response['jobs'].each do |job_json|
+         @jobs <<  OpenStruct.new(job_json)
+       end
+       @has_prev = zip_params['page'] != 1
+       @has_next = @total_jobs > zip_params['page'] * zip_params['jobs_per_page']
+       @next_link = "google.com?page=#{zip_params['page']+1}"
+       @prev_link = "google.com?page=#{zip_params['page']}"
+    rescue RestClient::ExceptionWithResponse => e
+       render text: "e.response"
+    end    
   end
 
   # GET /jobs/1
