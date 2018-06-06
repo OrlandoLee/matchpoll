@@ -1,19 +1,21 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
+  def landing
+  end
   # GET /jobs
   # GET /jobs.json
   def index
     url = 'https://api.ziprecruiter.com/jobs/v1'
     zip_params = {}
     zip_params['api_key'] = ENV["ZIP_API_KEY"]
-    zip_params['search'] = 'Perl Job'
-    zip_params['location'] = 'Santa Monica, CA'
+    zip_params['search'] = params['search']
+    zip_params['location'] = params['location']
     zip_params['radius_miles'] = 25
-    zip_params['page'] = 1
+    zip_params['page'] = params['page'].present? ? params['page'].to_i : 1
     zip_params['jobs_per_page'] = 10
-    zip_params['days_ago'] = ''
-    zip_params['refine_by_salary'] = ''
+    zip_params['days_ago'] = params['days_ago']
+    zip_params['refine_by_salary'] = params['refine_by_salary']
     
     begin
        response = RestClient.get url, {params: zip_params}
@@ -25,10 +27,14 @@ class JobsController < ApplicationController
        end
        @has_prev = zip_params['page'] != 1
        @has_next = @total_jobs > zip_params['page'] * zip_params['jobs_per_page']
-       @next_link = "google.com?page=#{zip_params['page']+1}"
-       @prev_link = "google.com?page=#{zip_params['page']}"
+       next_page_params = params.dup
+       next_page_params['page'] = zip_params['page'] + 1
+       prev_page_params = params.dup
+       prev_page_params['page'] = zip_params['page'] - 1
+       @next_link = jobs_url(next_page_params.permit!)
+       @prev_link = jobs_url(prev_page_params.permit!)
     rescue RestClient::ExceptionWithResponse => e
-       render text: "e.response"
+       render plain: "e.response"
     end    
   end
 
