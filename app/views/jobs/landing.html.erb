@@ -1,0 +1,12 @@
+<%= form_tag("/jobs", method: "get") do %>
+  <%= label_tag(:q, "Search all jobs:") %>
+  <%= label(:post, :job) %>
+  <%= text_field_tag(:search) %>
+  <%= label(:post, :location) %>
+  <%= text_field_tag(:location) %>
+  <%= label(:post, :published) %>
+  <%= select_tag(:days_ago, options_for_select([['No date restriction', ''], ['Toady', 1], ['This week', 7], ['This month', 31]])) %>
+  <%= label(:post, :salary) %>
+  <%= select_tag(:refine_by_salary, options_for_select([['No Limit', ''], ['More than 1000', 1000], ['More than 10,000', 10000], ['More than 50,000', 50000], ['More than 100,000', 100000], ['More than 150,000', 150000]])) %>
+  <%= submit_tag("Search") %>
+<% end %>
